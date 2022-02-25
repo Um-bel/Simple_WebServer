@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<head>
+
+</head>
+<body>
+    <input id="username" type="text">
+    <input id="password" type="password">
+    <button id="login">LOGIN</button>
+    <button id="sign_up">SIGN_UP</button>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io.connect("http://localhost:3000"); 
+
+        document.getElementById("login").addEventListener("click", function(e) {
+            socket.emit("LOGIN", {
+                    username: document.getElementById("username").value, 
+                    password: document.getElementById("password").value
+                }
+            ); 
+        }); 
+
+        document.getElementById("sign_up").addEventListener("click", function(e) {
+            window.location.href = "http://localhost:3000/sign_up"; 
+        }); 
+
+        socket.on("LOGIN_SUCESS", function(data) {
+            window.location.href = "http://localhost:3000/user/" + data.username; 
+        }); 
+
+        socket.on("LOGIN_PASSWORD_FAIL", function(data) {
+            alert("Incorrect Password"); 
+            document.getElementById("password").value = ""; 
+        }); 
+
+        socket.on("LOGIN_USERNAME_FAIL", function(data) {
+            alert("User not found"); 
+            document.getElementById("username").value = ""; 
+            document.getElementById("password").value = ""; 
+        }); 
+    </script>
+</body>

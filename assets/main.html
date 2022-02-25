@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<head>
+
+</head>
+<body>
+    <h1>WELCOME_MSG</h1>
+    <p>some cheesy shit, idk im a web developer not a web designer. I make it work, they make it pretty</p>
+    <button id="LOGIN">LOGIN</button>
+    <button id="SIGN_UP">SIGN_UP</button>
+    <!-- import the api shit here -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io.connect("http://localhost:3000"); 
+
+        document.getElementById("LOGIN").addEventListener("click", function(e) {
+            window.location.href = "http://localhost:3000/login"; 
+        }); 
+
+        document.getElementById("SIGN_UP").addEventListener("click", function(e) {
+            window.location.href = "http://localhost:3000/sign_up"; 
+        }); 
+    </script>
+</body>
